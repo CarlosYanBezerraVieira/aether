@@ -1,9 +1,8 @@
-import 'package:aether/animated_video.dart';
+import 'package:aether/body.dart';
+import 'package:aether/footer.dart';
+import 'package:aether/header.dart';
 import 'package:aether/ui/app_color.dart';
-import 'package:aether/ui/app_images.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 void main() {
   runApp(const MainApp());
@@ -14,72 +13,36 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double width = MediaQuery.of(context).size.width;
+    final double height = MediaQuery.of(context).size.height;
+    final bodyHeight = height * 0.5;
+    final bottomHeight = height * 0.3;
+    final horizontalSpace = -(width * 0.05);
+    final positionVerticalOfBody = (height - bodyHeight - bottomHeight) / 2;
     return CupertinoApp(
       debugShowCheckedModeBanner: false,
       home: Container(
-        padding: EdgeInsets.symmetric(
-          horizontal: 24,
-        ).copyWith(top: 32),
         color: AppColor.catedralColor,
         child: SafeArea(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          child: Stack(
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Column(
-                    mainAxisSize:
-                        MainAxisSize.min, // Evita ocupar todo o espaço vertical
-                    children: [
-                      Text(
-                        'Título Principal',
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        'Subtítulo menor',
-                        style: TextStyle(
-                            fontSize: 14, color: CupertinoColors.systemGrey),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      CupertinoButton(
-                        padding: EdgeInsets.zero,
-                        onPressed: () {},
-                        child: const Icon(
-                          CupertinoIcons.add,
-                          color: AppColor.textPrimaryColor,
-                        ),
-                      ),
-                      CupertinoButton(
-                          padding: EdgeInsets.zero,
-                          onPressed: () {},
-                          child: SvgPicture.asset(
-                            AppImages.textJustifyRight,
-                            height: 14,
-                            width: 14,
-                            colorFilter: const ColorFilter.mode(
-                              AppColor.textPrimaryColor,
-                              BlendMode.srcIn,
-                            ),
-                          )),
-                    ],
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 400,
-                width: 500,
-                child: AnimatedVideo(
-                  path: 'assets/places/catedral.mp4',
+              Positioned(
+                right: horizontalSpace,
+                left: horizontalSpace,
+                top: positionVerticalOfBody,
+                child: Body(
+                  height: bodyHeight,
+                  width: width,
                 ),
               ),
-              const Placeholder(
-                fallbackHeight: 200,
+              Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Header(),
+                  Footer(
+                    height: bottomHeight,
+                  ),
+                ],
               ),
             ],
           ),
