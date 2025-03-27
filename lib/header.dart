@@ -9,11 +9,12 @@ class Header extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24),
+      padding: const EdgeInsets.symmetric(horizontal: 24).copyWith(top: 24),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           const Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize:
                 MainAxisSize.min, // Evita ocupar todo o espaço vertical
             children: [
@@ -36,6 +37,7 @@ class Header extends StatelessWidget {
                 onPressed: () {},
                 child: const Icon(
                   CupertinoIcons.add,
+                  size: 24,
                   color: AppColor.textPrimaryColor,
                 ),
               ),
