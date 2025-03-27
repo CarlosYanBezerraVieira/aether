@@ -1,5 +1,5 @@
 import 'package:aether/animated_video.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 class Body extends StatelessWidget {
   final double width;
