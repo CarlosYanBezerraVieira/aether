@@ -1,5 +1,5 @@
-import 'package:aether/ui/app_color.dart';
-import 'package:aether/ui/app_images.dart';
+import 'package:aether/core/ui/app_color.dart';
+import 'package:aether/core/ui/app_images.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/svg.dart';
 

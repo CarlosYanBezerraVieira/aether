@@ -1,4 +1,4 @@
-import 'package:aether/ui/app_color.dart';
+import 'package:aether/core/ui/app_color.dart';
 import 'package:flutter/material.dart';
 
 class IndicatorOfScroll extends StatelessWidget {
