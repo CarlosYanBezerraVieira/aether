@@ -1,10 +1,15 @@
 import 'package:aether/home_page.dart';
 import 'package:aether/core/network/http_adapter.dart';
 import 'package:aether/core/network/htttp_client.dart';
+import 'package:aether/repositories/weather_repository.dart';
+import 'package:aether/repositories/weather_repository_impl.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await dotenv.load(fileName: ".env");
   runApp(const MainApp());
 }
 
@@ -15,8 +20,16 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(providers: [
       Provider<HttpClient>(
-          create: (_) => HttpAdapter(),
-          dispose: (context, adapter) => (adapter as HttpAdapter).dispose()),
+        create: (_) => HttpAdapter(
+            apiKey: dotenv.env['API_KEY'] ?? '',
+            baseUrl: dotenv.env['BASE_URL'] ?? ''),
+        dispose: (context, adapter) => (adapter as HttpAdapter).dispose(),
+      ),
+      Provider<WeatherRepository>(
+        create: (context) => WeatherRepositoryImpl(
+          httpClient: context.read<HttpClient>(),
+        ),
+      ),
     ], child: const HomePage());
   }
 }
