@@ -3,7 +3,7 @@ import 'package:aether/core/network/htttp_client.dart';
 
 class HttpAdapter implements HttpClient {
   final http.Client _client;
-
+  final String _baseUrl = 'https://api.openweathermap.org/';
   HttpAdapter({http.Client? client}) : _client = client ?? http.Client();
 
   void dispose() {
@@ -11,58 +11,59 @@ class HttpAdapter implements HttpClient {
   }
 
   @override
-  Future<HttpReponse> get(String url, {Map<String, String>? headers}) async {
-    final reponse = await _client.get(
-      Uri.parse(url),
+  Future<HttpResponse> get(String url, {Map<String, String>? headers}) async {
+    final response = await _client.get(
+      Uri.parse('$_baseUrl$url'),
       headers: headers,
     );
 
-    return HttpReponse(
-      reponse.statusCode,
-      reponse.body,
+    return HttpResponse(
+      response.statusCode,
+      response.body,
     );
   }
 
   @override
-  Future<HttpReponse> post(String url,
+  Future<HttpResponse> post(String url,
       {Map<String, String>? headers, body}) async {
-    final reponse = await _client.post(
-      Uri.parse(url),
+    final response = await _client.post(
+      Uri.parse('$_baseUrl$url'),
       headers: headers,
       body: body,
     );
 
-    return HttpReponse(
-      reponse.statusCode,
-      reponse.body,
+    return HttpResponse(
+      response.statusCode,
+      response.body,
     );
   }
 
   @override
-  Future<HttpReponse> put(String url,
+  Future<HttpResponse> put(String url,
       {Map<String, String>? headers, body}) async {
-    final reponse = await _client.put(
-      Uri.parse(url),
+    final response = await _client.put(
+      Uri.parse('$_baseUrl$url'),
       headers: headers,
       body: body,
     );
 
-    return HttpReponse(
-      reponse.statusCode,
-      reponse.body,
+    return HttpResponse(
+      response.statusCode,
+      response.body,
     );
   }
 
   @override
-  Future<HttpReponse> delete(String url, {Map<String, String>? headers}) async {
-    final reponse = await _client.delete(
-      Uri.parse(url),
+  Future<HttpResponse> delete(String url,
+      {Map<String, String>? headers}) async {
+    final response = await _client.delete(
+      Uri.parse('$_baseUrl$url'),
       headers: headers,
     );
 
-    return HttpReponse(
-      reponse.statusCode,
-      reponse.body,
+    return HttpResponse(
+      response.statusCode,
+      response.body,
     );
   }
 }
