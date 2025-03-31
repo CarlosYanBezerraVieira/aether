@@ -4,28 +4,31 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/svg.dart';
 
 class Header extends StatelessWidget {
-  const Header({super.key});
+  final String title;
+  final String subtitle;
+  const Header({super.key, required this.title, required this.subtitle});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24).copyWith(top: 24),
+      padding: const EdgeInsets.symmetric(horizontal: 24).copyWith(top: 16),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Column(
+          Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize:
                 MainAxisSize.min, // Evita ocupar todo o espaço vertical
             children: [
               Text(
-                'Título Principal',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                title,
+                style:
+                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               Text(
-                'Subtítulo menor',
-                style:
-                    TextStyle(fontSize: 14, color: CupertinoColors.systemGrey),
+                subtitle,
+                style: const TextStyle(
+                    fontSize: 14, color: CupertinoColors.systemGrey),
               ),
             ],
           ),
