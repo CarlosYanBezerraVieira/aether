@@ -5,9 +5,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:aether/modules/home/widgets/body.dart';
 import 'package:aether/modules/home/widgets/footer.dart';
 import 'package:aether/modules/home/widgets/header.dart';
-import 'package:aether/core/ui/app_color.dart';
-import 'package:aether/widgets/indicator_of_scroll.dart';
-import 'package:aether/widgets/show_temperature.dart';
+import 'package:aether/core/ui/utils/app_color.dart';
+import 'package:aether/core/ui/widgets/indicator_of_scroll.dart';
+import 'package:aether/core/ui/widgets/show_temperature.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {

@@ -1,4 +1,4 @@
-import 'package:aether/core/ui/app_color.dart';
+import 'package:aether/core/ui/utils/app_color.dart';
 import 'package:flutter/cupertino.dart';
 
 class ShowTemperature extends StatelessWidget {
@@ -21,6 +21,7 @@ class ShowTemperature extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CupertinoButton(
                 padding: EdgeInsets.zero,
