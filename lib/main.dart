@@ -1,4 +1,4 @@
-import 'package:aether/home/home_page.dart';
+import 'package:aether/modules/home/home_page.dart';
 import 'package:aether/core/network/http_adapter.dart';
 import 'package:aether/core/network/htttp_client.dart';
 import 'package:aether/repositories/weather_repository.dart';
@@ -9,7 +9,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
 
-import 'home/home_controller.dart';
+import 'modules/home/home_controller.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

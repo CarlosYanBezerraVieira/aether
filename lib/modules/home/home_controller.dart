@@ -1,7 +1,7 @@
-import 'package:aether/models/eather_model.dart';
+import 'package:aether/models/home/eather_model.dart';
 import 'package:aether/services/weather_service.dart';
 import 'package:flutter/foundation.dart';
-import '../models/lat_and_long_model.dart';
+import '../../models/weather_repository/lat_and_long_model.dart';
 
 class HomeController extends ChangeNotifier {
   final WeatherService _weatherService;

@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
-import 'package:aether/models/eather_model.dart';
-import 'package:aether/models/lat_and_long_model.dart';
+import 'package:aether/models/home/eather_model.dart';
+import 'package:aether/models/weather_repository/lat_and_long_model.dart';
 import 'package:aether/repositories/weather_repository.dart';
 import 'package:aether/services/weather_service.dart';
 

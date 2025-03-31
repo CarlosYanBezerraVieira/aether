@@ -14,7 +14,6 @@ class AnimatedVideoState extends State<AnimatedVideo> {
 
   @override
   void initState() {
-    //TODO carregar video logo no comeco do app
     super.initState();
     _controller =
         VideoPlayerController.asset(widget.path) // Substitua pelo seu vídeo

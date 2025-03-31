@@ -1,10 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
 import 'package:aether/core/network/htttp_client.dart';
-import 'package:aether/models/lat_and_long_model.dart';
+import 'package:aether/models/weather_repository/lat_and_long_model.dart';
 import 'package:aether/repositories/weather_repository.dart';
 
-import '../models/weather_data_model.dart';
+import '../models/weather_repository/weather_data_model.dart';
 
 class WeatherRepositoryImpl implements WeatherRepository {
   final HttpClient httpClient;
