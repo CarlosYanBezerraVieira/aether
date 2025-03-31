@@ -18,9 +18,9 @@ class WindModel {
 
   factory WindModel.fromMap(Map<String, dynamic> map) {
     return WindModel(
-      speed: map['speed'] ?? 0.0,
+      speed: map['speed']?.toDouble() ?? 0.0,
       deg: map['deg'] ?? 0,
-      gust: map['gust'] ?? 0.0,
+      gust: map['gust']?.toDouble() ?? 0.0,
     );
   }
 
