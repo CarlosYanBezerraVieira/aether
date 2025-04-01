@@ -1,5 +1,6 @@
-import 'package:aether/core/ui/app_color.dart';
-import 'package:aether/core/ui/app_images.dart';
+import 'package:aether/core/ui/utils/app_color.dart';
+import 'package:aether/core/ui/utils/app_images.dart';
+import 'package:aether/core/ui/widgets/button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -35,8 +36,7 @@ class Header extends StatelessWidget {
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              CupertinoButton(
-                padding: EdgeInsets.zero,
+              Button(
                 onPressed: () {},
                 child: const Icon(
                   CupertinoIcons.add,
@@ -44,8 +44,10 @@ class Header extends StatelessWidget {
                   color: AppColor.textPrimaryColor,
                 ),
               ),
-              CupertinoButton(
-                  padding: EdgeInsets.zero,
+              const SizedBox(
+                width: 24,
+              ),
+              Button(
                   onPressed: () {},
                   child: SvgPicture.asset(
                     AppImages.textJustifyRight,
