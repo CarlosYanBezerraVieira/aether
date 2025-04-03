@@ -25,26 +25,26 @@ class MainModel {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'temp': temp,
-      'feelsLike': feelsLike,
-      'tempMin': tempMin,
-      'tempMax': tempMax,
+      'feels_like': feelsLike,
+      'temp_min': tempMin,
+      'temp_max': tempMax,
       'pressure': pressure,
       'humidity': humidity,
-      'seaLevel': seaLevel,
-      'grndLevel': grndLevel,
+      'sea_level': seaLevel,
+      'grnd_level': grndLevel,
     };
   }
 
   factory MainModel.fromMap(Map<String, dynamic> map) {
     return MainModel(
       temp: map['temp']?.toDouble() ?? 0.0,
-      feelsLike: map['feelsLike']?.toDouble() ?? 0.0,
-      tempMin: map['tempMin']?.toDouble() ?? 0.0,
-      tempMax: map['tempMax']?.toDouble() ?? 0.0,
+      feelsLike: map['feels_like']?.toDouble() ?? 0.0,
+      tempMin: map['temp_min']?.toDouble() ?? 0.0,
+      tempMax: map['temp_max']?.toDouble() ?? 0.0,
       pressure: map['pressure'] ?? 0,
       humidity: map['humidity'] ?? 0,
-      seaLevel: map['seaLevel'] ?? 0,
-      grndLevel: map['grndLevel'] ?? 0,
+      seaLevel: map['sea_level'] ?? 0,
+      grndLevel: map['grnd_level'] ?? 0,
     );
   }
 
