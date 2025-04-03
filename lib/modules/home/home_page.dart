@@ -1,4 +1,6 @@
 import 'package:aether/core/helper/format_date.dart';
+import 'package:aether/core/helper/format_speed.dart';
+import 'package:aether/core/helper/format_temperature.dart';
 import 'package:aether/core/helper/format_text.dart';
 import 'package:aether/modules/home/home_controller.dart';
 import 'package:flutter/cupertino.dart';
@@ -106,7 +108,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                         ShowTemperature(
                           horizontalSpace: horizontalSpace,
-                          temperature: homeController.temperatureInCelsius,
+                          temperature: FormatTemperature.formatTemperatureInCelsius(homeController.temperatureInKelvin,),
                           weatherTypeMain: FormatText.formatText(
                             homeController.weatherTypeMain,
                           ),
@@ -122,6 +124,11 @@ class _HomePageState extends State<HomePage> {
                           selectedIndex: 0,
                         ),
                         Footer(
+                          feelsLike: FormatTemperature.formatTemperatureInCelsius(homeController.feelsLike),
+                          humidity: FormatText.formatNumberForPorcentage(homeController.humidity),
+                          precipitation: FormatText.formatNumberForPorcentage(homeController.precipitation),
+                          wind: FormatSpeed.formatSpeedInKilometersPerHour(homeController.windSpeed),
+                          
                           height: bottomHeight,
                         ),
                       ],
