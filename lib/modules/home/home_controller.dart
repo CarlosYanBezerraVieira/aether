@@ -6,14 +6,7 @@ import '../../models/weather_repository/lat_and_long_model.dart';
 class HomeController extends ChangeNotifier {
   final WeatherService _weatherService;
 
-  List<EatherModel> _data = [
-    EatherModel(
-        temperature: 273.15,
-        weatherTypeMain: 'Um pouco',
-        weatherTypeSecondary: 'nublado',
-        timezone: 0,
-        nameCity: 'Juazeiro do Norte')
-  ];
+  List<EatherModel> _data = [];
   bool _isLoading = false;
   String? _error;
 
@@ -34,22 +27,16 @@ class HomeController extends ChangeNotifier {
   ];
 
   int get timezone => data.first.timezone;
-
+  double get temperatureInKelvin => data.first.temperature;
   String get weatherTypeMain => data.first.weatherTypeMain;
   String get weatherTypeSecondary => data.first.weatherTypeSecondary;
 
-  String get temperatureInCelsius {
-    // 1. Converter a temperatura de Kelvin para Celsius
-    double kelvinTemperature = data.first.temperature;
-    double celsiusTemperature = kelvinTemperature - 273.15;
-
-    // 2. Formatar a temperatura em Celsius arredondando para o número inteiro mais próximo
-    String formattedTemperature = celsiusTemperature.round().toString();
-
-    return '$formattedTemperature°';
-  }
-
   String get nameCity => data.first.nameCity;
+
+  double get feelsLike => data.first.feelsLike;
+  int get humidity => data.first.humidity;
+  double get windSpeed => data.first.windSpeed;
+  double get precipitation => data.first.precipitation;
 
   Future<void> fetchWeather() async {
     _isLoading = true;
