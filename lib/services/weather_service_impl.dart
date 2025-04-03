@@ -25,6 +25,10 @@ class WeatherServiceImpl implements WeatherService {
       weatherTypeSecondary: weatherTypeSecondary,
       nameCity: response.name,
       timezone: response.timezone,
+      feelsLike: response.main.feelsLike,
+      humidity: response.main.humidity,
+      precipitation: response.rain?.oneHour ?? 0.0,
+      windSpeed: response.wind.speed,
     );
   }
 }
