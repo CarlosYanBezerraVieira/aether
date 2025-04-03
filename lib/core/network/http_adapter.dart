@@ -6,10 +6,12 @@ class HttpAdapter implements HttpClient {
   final String baseUrl;
 
   final String apiKey;
+  final String language;
 
   HttpAdapter({
     http.Client? client,
     required this.baseUrl,
+    required this.language,
     required this.apiKey,
   }) : _client = client ?? http.Client();
 
@@ -18,7 +20,7 @@ class HttpAdapter implements HttpClient {
   }
 
   String _buildUrl(String url) {
-    return '$baseUrl$url&appid=$apiKey';
+    return '$baseUrl$url&appid=$apiKey&lang=$language';
   }
 
   @override
