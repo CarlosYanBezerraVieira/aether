@@ -1,39 +1,42 @@
-import 'package:aether/core/ui/app_color.dart';
-import 'package:aether/core/ui/app_images.dart';
+import 'package:aether/core/ui/utils/app_color.dart';
+import 'package:aether/core/ui/utils/app_images.dart';
+import 'package:aether/core/ui/widgets/button.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_svg/svg.dart';
 
 class Header extends StatelessWidget {
-  const Header({super.key});
+  final String title;
+  final String subtitle;
+  const Header({super.key, required this.title, required this.subtitle});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24).copyWith(top: 24),
+      padding: const EdgeInsets.symmetric(horizontal: 24).copyWith(top: 16),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Column(
+          Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize:
                 MainAxisSize.min, // Evita ocupar todo o espaço vertical
             children: [
               Text(
-                'Título Principal',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                title,
+                style:
+                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               Text(
-                'Subtítulo menor',
-                style:
-                    TextStyle(fontSize: 14, color: CupertinoColors.systemGrey),
+                subtitle,
+                style: const TextStyle(
+                    fontSize: 14, color: CupertinoColors.systemGrey),
               ),
             ],
           ),
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              CupertinoButton(
-                padding: EdgeInsets.zero,
+              Button(
                 onPressed: () {},
                 child: const Icon(
                   CupertinoIcons.add,
@@ -41,8 +44,10 @@ class Header extends StatelessWidget {
                   color: AppColor.textPrimaryColor,
                 ),
               ),
-              CupertinoButton(
-                  padding: EdgeInsets.zero,
+              const SizedBox(
+                width: 24,
+              ),
+              Button(
                   onPressed: () {},
                   child: SvgPicture.asset(
                     AppImages.textJustifyRight,

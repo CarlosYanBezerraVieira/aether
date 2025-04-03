@@ -1,9 +1,17 @@
-import 'package:aether/core/ui/app_color.dart';
+import 'package:aether/core/ui/utils/app_color.dart';
 import 'package:flutter/cupertino.dart';
 
 class ShowTemperature extends StatelessWidget {
+  final String temperature;
+  final String weatherTypeMain;
+  final String weatherTypeSecondary;
   final double horizontalSpace;
-  const ShowTemperature({super.key, required this.horizontalSpace});
+  const ShowTemperature(
+      {super.key,
+      required this.horizontalSpace,
+      required this.temperature,
+      required this.weatherTypeMain,
+      required this.weatherTypeSecondary});
 
   @override
   Widget build(BuildContext context) {
@@ -13,6 +21,7 @@ class ShowTemperature extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CupertinoButton(
                 padding: EdgeInsets.zero,
@@ -23,22 +32,22 @@ class ShowTemperature extends StatelessWidget {
                   color: AppColor.textPrimaryColor,
                 ),
               ),
-              const Text('Mostly',
-                  style: TextStyle(
+              Text(weatherTypeMain,
+                  style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                     color: AppColor.textPrimaryColor,
                   )),
-              const Text('cloudy',
-                  style: TextStyle(
+              Text(weatherTypeSecondary,
+                  style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                     color: AppColor.textPrimaryColor,
                   )),
             ],
           ),
-          const Text('34°',
-              style: TextStyle(
+          Text(temperature,
+              style: const TextStyle(
                 fontSize: 98,
                 fontWeight: FontWeight.bold,
                 color: AppColor.textPrimaryColor,

@@ -1,4 +1,4 @@
-import 'package:aether/animated_video.dart';
+import 'package:aether/core/ui/widgets/animated_video.dart';
 import 'package:flutter/cupertino.dart';
 
 class Body extends StatelessWidget {

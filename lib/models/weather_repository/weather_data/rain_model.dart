@@ -14,7 +14,7 @@ class RainModel {
 
   factory RainModel.fromMap(Map<String, dynamic> map) {
     return RainModel(
-      oneHour: map['oneHour'] ?? 0.0,
+      oneHour: map['oneHour']?.toDouble() ?? 0.0,
     );
   }
 

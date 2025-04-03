@@ -16,8 +16,8 @@ class CoordModel {
 
   factory CoordModel.fromMap(Map<String, dynamic> map) {
     return CoordModel(
-      lon: map['lon'] ?? 0.0,
-      lat: map['lat'] ?? 0.0,
+      lon: map['lon']?.toDouble() ?? 0.0,
+      lat: map['lat']?.toDouble() ?? 0.0,
     );
   }
 

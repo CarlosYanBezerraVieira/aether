@@ -1,12 +1,12 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
-import 'package:aether/models/weather_data/clouds_model.dart';
-import 'package:aether/models/weather_data/coord_model.dart';
-import 'package:aether/models/weather_data/rain_model.dart';
-import 'package:aether/models/weather_data/sys_model.dart';
-import 'package:aether/models/weather_data/weather_model.dart';
-import 'package:aether/models/weather_data/wind.dart';
+import 'package:aether/models/weather_repository/weather_data/clouds_model.dart';
+import 'package:aether/models/weather_repository/weather_data/coord_model.dart';
+import 'package:aether/models/weather_repository/weather_data/rain_model.dart';
+import 'package:aether/models/weather_repository/weather_data/sys_model.dart';
+import 'package:aether/models/weather_repository/weather_data/weather_model.dart';
+import 'package:aether/models/weather_repository/weather_data/wind.dart';
 
 import 'weather_data/main_model.dart';
 

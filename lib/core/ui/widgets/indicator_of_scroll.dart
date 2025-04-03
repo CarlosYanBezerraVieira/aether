@@ -1,4 +1,4 @@
-import 'package:aether/core/ui/app_color.dart';
+import 'package:aether/core/ui/utils/app_color.dart';
 import 'package:flutter/material.dart';
 
 class IndicatorOfScroll extends StatelessWidget {
@@ -21,7 +21,7 @@ class IndicatorOfScroll extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: index == selectedIndex
                           ? AppColor.textPrimaryColor
-                          : AppColor.textTertiaryColor,
+                          : AppColor.indicatorNoSelectedColor,
                       borderRadius: BorderRadius.circular(12),
                     ),
                   )),
