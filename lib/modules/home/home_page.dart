@@ -11,9 +11,11 @@ import 'package:aether/core/ui/utils/app_color.dart';
 import 'package:aether/core/ui/widgets/indicator_of_scroll.dart';
 import 'package:aether/core/ui/widgets/show_temperature.dart';
 import 'package:provider/provider.dart';
+import 'package:video_player/video_player.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  final List<VideoPlayerController> controllers;
+  const HomePage({super.key, required this.controllers});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -28,6 +30,14 @@ class _HomePageState extends State<HomePage> {
     });
     super.initState();
   }
+  int currentPage = 0;
+  void onPageChanged(int index) {
+    setState(() {
+      currentPage = index;
+    });
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -87,8 +97,10 @@ class _HomePageState extends State<HomePage> {
                   left: horizontalSpace,
                   top: positionVerticalOfBody,
                   child: Body(
+                    controllers: widget.controllers,
                     height: bodyHeight,
                     width: width,
+                    onPageChanged: onPageChanged,
                   ),
                 ),
                 Column(
@@ -120,8 +132,8 @@ class _HomePageState extends State<HomePage> {
                     ),
                     Column(
                       children: [
-                        const IndicatorOfScroll(
-                          selectedIndex: 0,
+                         IndicatorOfScroll(
+                          selectedIndex: currentPage,
                         ),
                         Footer(
                           feelsLike: FormatTemperature.formatTemperatureInCelsiusWithString(homeController.feelsLike),
