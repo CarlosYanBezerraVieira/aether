@@ -1,8 +1,10 @@
 import 'package:aether/core/ui/utils/app_color.dart';
 import 'package:flutter/cupertino.dart';
 
+import 'animated_temperature_text.dart';
+
 class ShowTemperature extends StatelessWidget {
-  final String temperature;
+  final int temperature;
   final String weatherTypeMain;
   final String weatherTypeSecondary;
   final double horizontalSpace;
@@ -46,12 +48,9 @@ class ShowTemperature extends StatelessWidget {
                   )),
             ],
           ),
-          Text(temperature,
-              style: const TextStyle(
-                fontSize: 98,
-                fontWeight: FontWeight.bold,
-                color: AppColor.textPrimaryColor,
-              )),
+          AnimatedTemperatureText(
+            newTemperature: temperature,
+          ),
         ],
       ),
     );
