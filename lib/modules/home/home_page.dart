@@ -124,7 +124,7 @@ class _HomePageState extends State<HomePage> {
                           selectedIndex: 0,
                         ),
                         Footer(
-                          feelsLike: FormatTemperature.formatTemperatureInCelsius(homeController.feelsLike),
+                          feelsLike: FormatTemperature.formatTemperatureInCelsiusWithString(homeController.feelsLike),
                           humidity: FormatText.formatNumberForPorcentage(homeController.humidity),
                           precipitation: FormatText.formatNumberForPorcentage(homeController.precipitation),
                           wind: FormatSpeed.formatSpeedInKilometersPerHour(homeController.windSpeed),
