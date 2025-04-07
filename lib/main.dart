@@ -1,4 +1,5 @@
-import 'package:aether/modules/home/home_page.dart';
+import 'package:aether/modules/animated_video/animated_controller.dart';
+import 'package:aether/modules/animated_video/widgets/video_loading_wrapper.dart';
 import 'package:aether/core/network/http_adapter.dart';
 import 'package:aether/core/network/htttp_client.dart';
 import 'package:aether/repositories/weather_repository.dart';
@@ -15,7 +16,7 @@ import 'modules/home/home_controller.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: ".env");
-
+  
 
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
@@ -30,31 +31,38 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-        providers: [
-          Provider<HttpClient>(
-            create: (_) => HttpAdapter(
-                language: dotenv.env['LANGUAGE'] ?? 'pt_br',
-                apiKey: dotenv.env['API_KEY'] ?? '',
-                baseUrl: dotenv.env['BASE_URL'] ?? ''),
-            dispose: (context, adapter) => (adapter as HttpAdapter).dispose(),
+      providers: [
+        Provider<HttpClient>(
+          create: (_) => HttpAdapter(
+              language: dotenv.env['LANGUAGE'] ?? 'pt_br',
+              apiKey: dotenv.env['API_KEY'] ?? '',
+              baseUrl: dotenv.env['BASE_URL'] ?? ''),
+          dispose: (context, adapter) => (adapter as HttpAdapter).dispose(),
+        ),
+        Provider<WeatherRepository>(
+          create: (context) => WeatherRepositoryImpl(
+            httpClient: context.read<HttpClient>(),
           ),
-          Provider<WeatherRepository>(
-            create: (context) => WeatherRepositoryImpl(
-              httpClient: context.read<HttpClient>(),
-            ),
+        ),
+        Provider<WeatherService>(
+          create: (context) => WeatherServiceImpl(
+            weatherRepository: context.read<WeatherRepository>(),
           ),
-          Provider<WeatherService>(
-            create: (context) => WeatherServiceImpl(
-              weatherRepository: context.read<WeatherRepository>(),
-            ),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => HomeController(
+            weatherService: context.read<WeatherService>(),
           ),
-          ChangeNotifierProvider(
-            create: (context) => HomeController(
-              weatherService: context.read<WeatherService>(),
-            ),
-          ),
-        ],
-        child: const CupertinoApp(
-            debugShowCheckedModeBanner: false, home: HomePage()));
+        ),
+        FutureProvider(
+          create: (_) => AnimatedVideoData.loadVideos(),
+          initialData: AnimatedVideoController(controllers: []),
+        ),
+      ],
+      child:  const CupertinoApp(
+        debugShowCheckedModeBanner: false,
+        home: VideoLoadingWrapper(),
+      ),
+    );
   }
 }
