@@ -1,19 +1,23 @@
-import 'package:aether/core/ui/utils/app_color.dart';
+import 'package:aether/core/ui/animated_description_weather.dart';
 import 'package:flutter/cupertino.dart';
 
+import '../animated_icon_weather.dart';
 import 'animated_temperature_text.dart';
 
 class ShowTemperature extends StatelessWidget {
   final int temperature;
-  final String weatherTypeMain;
-  final String weatherTypeSecondary;
-  final double horizontalSpace;
+  final List<AnimatedDescriptionWeatherModel> listOfDescriptionWeather;
+  final List<IconData> listOfIconsWeather;
+  final PageController pageControllerOfDescriptionWeather;
+  final PageController pageControllerOfIconWeather;
   const ShowTemperature(
       {super.key,
-      required this.horizontalSpace,
       required this.temperature,
-      required this.weatherTypeMain,
-      required this.weatherTypeSecondary});
+      y,
+      required this.listOfDescriptionWeather,
+      required this.listOfIconsWeather,
+      required this.pageControllerOfDescriptionWeather,
+      required this.pageControllerOfIconWeather});
 
   @override
   Widget build(BuildContext context) {
@@ -25,27 +29,13 @@ class ShowTemperature extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CupertinoButton(
-                padding: EdgeInsets.zero,
-                onPressed: () {},
-                child: const Icon(
-                  CupertinoIcons.cloud_sun,
-                  size: 40,
-                  color: AppColor.textPrimaryColor,
-                ),
-              ),
-              Text(weatherTypeMain,
-                  style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: AppColor.textPrimaryColor,
-                  )),
-              Text(weatherTypeSecondary,
-                  style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: AppColor.textPrimaryColor,
-                  )),
+              AnimatedIconWeather(
+                  listOfIconsWeather: listOfIconsWeather,
+                  pageController:pageControllerOfIconWeather ),
+           
+              AnimatedDescriptionWeather(
+                  pageController: pageControllerOfDescriptionWeather,
+                  listOfDescriptionWeather: listOfDescriptionWeather)
             ],
           ),
           AnimatedTemperatureText(

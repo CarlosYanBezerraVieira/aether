@@ -2,6 +2,7 @@ import 'package:aether/core/helper/format_date.dart';
 import 'package:aether/core/helper/format_speed.dart';
 import 'package:aether/core/helper/format_temperature.dart';
 import 'package:aether/core/helper/format_text.dart';
+import 'package:aether/core/ui/animated_description_weather.dart';
 import 'package:aether/modules/home/home_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:aether/modules/home/widgets/body.dart';
@@ -30,14 +31,33 @@ class _HomePageState extends State<HomePage> {
     });
     super.initState();
   }
+
+  int currentTab = 0;
+  void onTabChanged(int index) {
+    setState(() {
+      currentTab = index;
+    });
+  }
+
   int currentPage = 0;
   void onPageChanged(int index) {
     setState(() {
       currentPage = index;
     });
+    pageControllerOfDescriptionWeather.animateToPage(
+      index,
+      duration: const Duration(milliseconds: 500),
+      curve: Curves.easeInOut,
+    );
+    pageControllerOfIconWeather.animateToPage(
+      index,
+      duration: const Duration(seconds: 1),
+      curve: Curves.bounceOut,
+    );
   }
 
-
+  final PageController pageControllerOfDescriptionWeather = PageController();
+  final PageController pageControllerOfIconWeather = PageController();
 
   @override
   Widget build(BuildContext context) {
@@ -119,28 +139,51 @@ class _HomePageState extends State<HomePage> {
                           height: 32,
                         ),
                         ShowTemperature(
-                          horizontalSpace: horizontalSpace,
-                          temperature: FormatTemperature.formatTemperatureInCelsius(homeController.temperatureInKelvin,),
-                          weatherTypeMain: FormatText.formatText(
-                            homeController.weatherTypeMain,
-                          ),
-                          weatherTypeSecondary: FormatText.formatText(
-                            homeController.weatherTypeSecondary,
+                          pageControllerOfDescriptionWeather:
+                              pageControllerOfDescriptionWeather,
+                          pageControllerOfIconWeather:
+                              pageControllerOfIconWeather,
+                          listOfDescriptionWeather: [
+                            AnimatedDescriptionWeatherModel(
+                              weatherTypeMain: 'Um pouco',
+                              weatherTypeSecondary: 'frio',
+                            ),
+                            AnimatedDescriptionWeatherModel(
+                              weatherTypeMain: 'Um pouco',
+                              weatherTypeSecondary: 'nublado',
+                            ),
+                            AnimatedDescriptionWeatherModel(
+                              weatherTypeMain: 'Um pouco',
+                              weatherTypeSecondary: 'ventoso',
+                            ),
+                          ],
+                          listOfIconsWeather: const [
+                            CupertinoIcons.cloud_sun,
+                            CupertinoIcons.cloud_snow,
+                            CupertinoIcons.cloud_bolt_rain
+                          ],
+                          temperature:
+                              FormatTemperature.formatTemperatureInCelsius(
+                            homeController.temperatureInKelvin,
                           ),
                         )
                       ],
                     ),
                     Column(
                       children: [
-                         IndicatorOfScroll(
+                        IndicatorOfScroll(
                           selectedIndex: currentPage,
                         ),
                         Footer(
-                          feelsLike: FormatTemperature.formatTemperatureInCelsiusWithString(homeController.feelsLike),
-                          humidity: FormatText.formatNumberForPorcentage(homeController.humidity),
-                          precipitation: FormatText.formatNumberForPorcentage(homeController.precipitation),
-                          wind: FormatSpeed.formatSpeedInKilometersPerHour(homeController.windSpeed),
-                          
+                          feelsLike: FormatTemperature
+                              .formatTemperatureInCelsiusWithString(
+                                  homeController.feelsLike),
+                          humidity: FormatText.formatNumberForPorcentage(
+                              homeController.humidity),
+                          precipitation: FormatText.formatNumberForPorcentage(
+                              homeController.precipitation),
+                          wind: FormatSpeed.formatSpeedInKilometersPerHour(
+                              homeController.windSpeed),
                           height: bottomHeight,
                         ),
                       ],
