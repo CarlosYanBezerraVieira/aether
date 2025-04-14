@@ -18,6 +18,14 @@ class HomeController extends ChangeNotifier {
   bool get isLoading => _isLoading;
   String? get error => _error;
 
+  int _currentPage = 0;
+  int get currentPage => _currentPage;
+
+  void setCurrentPage(int index) {
+    _currentPage = index;
+    notifyListeners();
+  }
+
   final places = <LatAndLongModel>[
     LatAndLongModel(lat: 37.7749, long: -122.4194), // San Francisco
     LatAndLongModel(lat: 34.0522, long: -118.2437), // Los Angeles
@@ -26,17 +34,17 @@ class HomeController extends ChangeNotifier {
     LatAndLongModel(lat: 51.5074, long: -0.1278), // London
   ];
 
-  int get timezone => data.first.timezone;
-  double get temperatureInKelvin => data.first.temperature;
-  String get weatherTypeMain => data.first.weatherTypeMain;
-  String get weatherTypeSecondary => data.first.weatherTypeSecondary;
+  int get timezone => data[currentPage].timezone;
+  double get temperatureInKelvin => data[currentPage].temperature;
+  String get weatherTypeMain => data[currentPage].weatherTypeMain;
+  String get weatherTypeSecondary => data[currentPage].weatherTypeSecondary;
 
-  String get nameCity => data.first.nameCity;
+  String get nameCity => data[currentPage].nameCity;
 
-  double get feelsLike => data.first.feelsLike;
-  int get humidity => data.first.humidity;
-  double get windSpeed => data.first.windSpeed;
-  double get precipitation => data.first.precipitation;
+  double get feelsLike => data[currentPage].feelsLike;
+  int get humidity => data[currentPage].humidity;
+  double get windSpeed => data[currentPage].windSpeed;
+  double get precipitation => data[currentPage].precipitation;
 
   Future<void> fetchWeather() async {
     _isLoading = true;

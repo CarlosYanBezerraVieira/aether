@@ -32,18 +32,13 @@ class _HomePageState extends State<HomePage> {
     super.initState();
   }
 
-  int currentTab = 0;
-  void onTabChanged(int index) {
-    setState(() {
-      currentTab = index;
-    });
+  void onPageChanged(int index) {
+    final homeController = Provider.of<HomeController>(context, listen: false);
+    homeController.setCurrentPage(index);
+    animateToNextPage(index);
   }
 
-  int currentPage = 0;
-  void onPageChanged(int index) {
-    setState(() {
-      currentPage = index;
-    });
+  void animateToNextPage(int index) {
     pageControllerOfDescriptionWeather.animateToPage(
       index,
       duration: const Duration(milliseconds: 500),
@@ -172,7 +167,7 @@ class _HomePageState extends State<HomePage> {
                     Column(
                       children: [
                         IndicatorOfScroll(
-                          selectedIndex: currentPage,
+                          selectedIndex: homeController.currentPage,
                         ),
                         Footer(
                           feelsLike: FormatTemperature
