@@ -1,4 +1,9 @@
+import 'package:aether/core/helper/format_date.dart';
+import 'package:aether/core/helper/format_speed.dart';
+import 'package:aether/core/helper/format_temperature.dart';
+import 'package:aether/core/helper/format_text.dart';
 import 'package:aether/models/home/eather_model.dart';
+import 'package:aether/models/home/footer/weather_group_of_info_model.dart';
 import 'package:aether/services/weather_service.dart';
 import 'package:flutter/foundation.dart';
 import '../../models/weather_repository/lat_and_long_model.dart';
@@ -35,16 +40,32 @@ class HomeController extends ChangeNotifier {
   ];
 
   int get timezone => data[currentPage].timezone;
+  String get dateNow =>
+      'Hoje ${FormatDate.formatTimeWithMonthDateAndHourMinute(timezone: timezone)}';
+
   double get temperatureInKelvin => data[currentPage].temperature;
+
+  int get temperatureInCelcius =>
+      FormatTemperature.formatTemperatureInCelsius(temperatureInKelvin);
+
   String get weatherTypeMain => data[currentPage].weatherTypeMain;
   String get weatherTypeSecondary => data[currentPage].weatherTypeSecondary;
 
   String get nameCity => data[currentPage].nameCity;
 
-  double get feelsLike => data[currentPage].feelsLike;
-  int get humidity => data[currentPage].humidity;
-  double get windSpeed => data[currentPage].windSpeed;
-  double get precipitation => data[currentPage].precipitation;
+  List<WeatherGroupOfInfoModel> get weatherGroupFormatted => _data
+      .map(
+        (eatherModel) => WeatherGroupOfInfoModel(
+          feelsLike: FormatTemperature.formatTemperatureInCelsiusWithString(
+              eatherModel.feelsLike),
+          humidity: FormatText.formatNumberForPorcentage(eatherModel.humidity),
+          precipitation:
+              FormatText.formatNumberForPorcentage(eatherModel.precipitation),
+          wind:
+              FormatSpeed.formatSpeedInKilometersPerHour(eatherModel.windSpeed),
+        ),
+      )
+      .toList();
 
   Future<void> fetchWeather() async {
     _isLoading = true;

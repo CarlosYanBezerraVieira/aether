@@ -1,7 +1,3 @@
-import 'package:aether/core/helper/format_date.dart';
-import 'package:aether/core/helper/format_speed.dart';
-import 'package:aether/core/helper/format_temperature.dart';
-import 'package:aether/core/helper/format_text.dart';
 import 'package:aether/core/ui/animated_description_weather.dart';
 import 'package:aether/modules/home/home_controller.dart';
 import 'package:flutter/cupertino.dart';
@@ -49,10 +45,24 @@ class _HomePageState extends State<HomePage> {
       duration: const Duration(seconds: 1),
       curve: Curves.bounceOut,
     );
+    pageControllerOfWeatherGroupOfInfo.animateToPage(
+      index,
+      duration: const Duration(milliseconds: 500),
+      curve: Curves.easeInOut,
+    );
   }
 
   final PageController pageControllerOfDescriptionWeather = PageController();
   final PageController pageControllerOfIconWeather = PageController();
+  final PageController pageControllerOfWeatherGroupOfInfo = PageController();
+
+  @override
+  void dispose() {
+    pageControllerOfDescriptionWeather.dispose();
+    pageControllerOfIconWeather.dispose();
+    pageControllerOfWeatherGroupOfInfo.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -125,10 +135,7 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         Header(
                           title: homeController.nameCity,
-                          subtitle:
-                              'Hoje ${FormatDate.formatTimeWithMonthDateAndHourMinute(
-                            timezone: homeController.timezone,
-                          )}',
+                          subtitle: homeController.dateNow,
                         ),
                         const SizedBox(
                           height: 32,
@@ -157,10 +164,7 @@ class _HomePageState extends State<HomePage> {
                             CupertinoIcons.cloud_snow,
                             CupertinoIcons.cloud_bolt_rain
                           ],
-                          temperature:
-                              FormatTemperature.formatTemperatureInCelsius(
-                            homeController.temperatureInKelvin,
-                          ),
+                          temperature: homeController.temperatureInCelcius,
                         )
                       ],
                     ),
@@ -170,17 +174,12 @@ class _HomePageState extends State<HomePage> {
                           selectedIndex: homeController.currentPage,
                         ),
                         Footer(
-                          feelsLike: FormatTemperature
-                              .formatTemperatureInCelsiusWithString(
-                                  homeController.feelsLike),
-                          humidity: FormatText.formatNumberForPorcentage(
-                              homeController.humidity),
-                          precipitation: FormatText.formatNumberForPorcentage(
-                              homeController.precipitation),
-                          wind: FormatSpeed.formatSpeedInKilometersPerHour(
-                              homeController.windSpeed),
+                          pageControllerOfWeatherGroupOfInfo:
+                              pageControllerOfWeatherGroupOfInfo,
+                          weatherGroupOfInfoModels:
+                              homeController.weatherGroupFormatted,
                           height: bottomHeight,
-                        ),
+                        )
                       ],
                     ),
                   ],
