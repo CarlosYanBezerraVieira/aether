@@ -1,25 +1,24 @@
 import 'package:aether/core/ui/utils/app_color.dart';
-import 'package:aether/core/ui/widgets/weather_info.dart';
+import 'package:aether/core/ui/widgets/animated_weather_group_of_info.dart';
 import 'package:aether/core/ui/widgets/weather_tab.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:aether/models/home/footer/weather_group_of_info_model.dart';
 import 'package:flutter/material.dart';
 
 class Footer extends StatelessWidget {
-  final String feelsLike;
-  final String wind;
-  final String precipitation;
-  final String humidity;
+  final PageController pageControllerOfWeatherGroupOfInfo;
+  final List<WeatherGroupOfInfoModel> weatherGroupOfInfoModels;
   final double height;
-  const Footer(
-      {super.key,
-      required this.height,
-      required this.feelsLike,
-      required this.wind,
-      required this.precipitation,
-      required this.humidity});
+  const Footer({
+    super.key,
+    required this.height,
+    required this.weatherGroupOfInfoModels,
+    required this.pageControllerOfWeatherGroupOfInfo,
+  });
 
+  final double sizeOfTitleAndTab = 140;
   @override
   Widget build(BuildContext context) {
+    final double width = MediaQuery.of(context).size.width;
     return Container(
       height: height,
       padding: const EdgeInsets.symmetric(horizontal: 24).copyWith(top: 24),
@@ -41,75 +40,13 @@ class Footer extends StatelessWidget {
           const SizedBox(
             height: 24,
           ),
-          Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    flex: 2,
-                    child: WeatherInfo(
-                      title: "Sensação Térmica",
-                      subtitle: feelsLike,
-                      icon: const Text(
-                        '°C',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w500,
-                          color: AppColor.textPrimaryColor,
-                        ),
-                      ),
-                    ),
-                  ),
-                  const Spacer(flex: 1),
-                  Expanded(
-                    flex: 2,
-                    child: WeatherInfo(
-                      title: "Vento",
-                      subtitle: wind,
-                      icon: const Icon(
-                        CupertinoIcons.wind,
-                        color: AppColor.textPrimaryColor,
-                        size: 24,
-                      ),
-                    ),
-                  )
-                ],
-              ),
-              const SizedBox(
-                height: 24,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(
-                    flex: 2,
-                    child: WeatherInfo(
-                      title: "Precipitação",
-                      subtitle: precipitation,
-                      icon: const Icon(
-                        CupertinoIcons.umbrella,
-                        color: AppColor.textPrimaryColor,
-                        size: 24,
-                      ),
-                    ),
-                  ),
-                  const Spacer(flex: 1),
-                  Expanded(
-                    flex: 2,
-                    child: WeatherInfo(
-                      title: "Húmidade",
-                      subtitle: humidity,
-                      icon: const Icon(
-                        CupertinoIcons.drop,
-                        color: AppColor.textPrimaryColor,
-                        size: 24,
-                      ),
-                    ),
-                  )
-                ],
-              )
-            ],
+          SizedBox(
+            height: height - sizeOfTitleAndTab,
+            width: width,
+            child: AnimatedWeatherGroupOfInfo(
+              pageController: pageControllerOfWeatherGroupOfInfo,
+              weatherGroupOfInfoModels: weatherGroupOfInfoModels,
+            ),
           ),
           const SizedBox(
             height: 24,
